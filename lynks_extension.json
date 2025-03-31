@@ -24,7 +24,7 @@
         }
     },
     "version": "0.1",
-    "versionCityJSON": "1.1",
+    "versionCityJSON": "2.0",
     "extraRootProperties": {},
     "extraAttributes": {
         "_AbstractCityObject": {
@@ -69,5 +69,21 @@
             }
         }
     },
-    "extraCityObjects": {}
+    "extraCityObjects": "extraCityObjects": {
+        "+Item": {
+            "allOf": [
+                {
+                    "$ref": "cityobjects.json#/_AbstractCityObject"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "enum": ["+Item"]
+                        }
+                    },
+                    "required": ["type"]
+                }
+            ]
+        }
+    },
 }
