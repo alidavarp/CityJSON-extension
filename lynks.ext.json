@@ -74,7 +74,7 @@
         "+Item": {
             "allOf": [
                 {
-                    "$ref": "https://www.cityjson.org/schemas/2.0.0/cityobjects.schema.json#/_AbstractCityObject"
+                    "$ref": ""https://3d.bk.tudelft.nl/schemas/cityjson/2.0.0/cityobjects.schema.json#/_AbstractCityObject"
                 },
                 {
                     "properties": {
