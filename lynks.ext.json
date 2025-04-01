@@ -1,6 +1,7 @@
 {
     "type": "CityJSONExtension",
     "name": "Lynks",
+	"url": "https://www.github.com/alidavarp/test/blob/main/lynks.ext.json",
     "description": "Extension to model inspection data links",
     "definitions": {
         "_matrix": {
@@ -69,7 +70,7 @@
             }
         }
     },
-    "extraCityObjects": "extraCityObjects": {
+    "extraCityObjects": {
         "+Item": {
             "allOf": [
                 {
@@ -85,5 +86,5 @@
                 }
             ]
         }
-    },
+    }
 }
