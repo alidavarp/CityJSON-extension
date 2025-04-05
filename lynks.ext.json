@@ -22,7 +22,36 @@
         "description": "URL to a file location.",
         "pattern": "^(https?|http?|wss?|ftp?|sftp?|smb?|file):",
         "type": "string"
-        }
+        },
+		"_AbstractCityObject": {
+			"properties": {
+				"attributes": {
+					"type": "object"
+				},
+				"parents": {
+					"type": "array",
+					"description": "the IDs of the parents",
+					"items": {
+						"type": "string"
+					}
+				},
+				"children": {
+					"type": "array",
+					"description": "the IDs of children",
+					"items": {
+						"type": "string"
+					}
+				},
+				"geographicalExtent": {
+					"type": "array",
+					"items": {
+						"type": "number"
+					},
+					"minItems": 6,
+					"maxItems": 6
+				}
+			}
+		}
     },
     "version": "0.1",
     "versionCityJSON": "2.0",
@@ -74,7 +103,7 @@
         "+Item": {
             "allOf": [
                 {
-                    "$ref": ""https://3d.bk.tudelft.nl/schemas/cityjson/2.0.0/cityobjects.schema.json#/_AbstractCityObject"
+                    "$ref": "#/definitions/_AbstractCityObject"
                 },
                 {
                     "properties": {
