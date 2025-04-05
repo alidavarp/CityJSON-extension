@@ -1,119 +1,117 @@
 {
-    "type": "CityJSONExtension",
-    "name": "Lynks",
-	"url": "https://www.github.com/alidavarp/test/blob/main/lynks.ext.json",
-    "description": "Extension to model inspection data links",
-    "definitions": {
-        "_matrix": {
-        "description": "Matrix for affine transformations of size (4,4) filled with decimal numbers.",
-        "items": {
-            "type": "array",
-            "minItems": 4,
-            "maxItems": 4,
-            "items": {
-            "type": "number"
-            }
-        },
-        "maxItems": 4,
+  "type": "CityJSONExtension",
+  "name": "Lynks",
+  "url": "https://www.github.com/alidavarp/test/blob/main/lynks.ext.json",
+  "description": "Extension to model inspection data links",
+  "definitions": {
+    "_matrix": {
+      "description": "Matrix for affine transformations of size (4,4) filled with decimal numbers.",
+      "items": {
+        "type": "array",
         "minItems": 4,
-        "type": "array"
-        },
-        "_url": {
-        "description": "URL to a file location.",
-        "pattern": "^(https?|http?|wss?|ftp?|sftp?|smb?|file):",
-        "type": "string"
-        },
-		"_AbstractCityObject": {
-			"properties": {
-				"attributes": {
-					"type": "object"
-				},
-				"parents": {
-					"type": "array",
-					"description": "the IDs of the parents",
-					"items": {
-						"type": "string"
-					}
-				},
-				"children": {
-					"type": "array",
-					"description": "the IDs of children",
-					"items": {
-						"type": "string"
-					}
-				},
-				"geographicalExtent": {
-					"type": "array",
-					"items": {
-						"type": "number"
-					},
-					"minItems": 6,
-					"maxItems": 6
-				}
-			}
-		}
-    },
-    "version": "0.1",
-    "versionCityJSON": "2.0",
-    "extraRootProperties": {},
-    "extraAttributes": {
-        "_AbstractCityObject": {
-        "+lynksFormat": {
-            "description": "File format key that indicated the interpreter of the resource content if an URL is defined.",
-            "type": [
-            "string",
-            "null"
-            ]
-        },
-        "+lynksTransformation": {
-            "description": "Affine transformation matrix of size (4,4) to transform the resource content to the coordinate system of the parent (or if no parent existing to the global coordinates).",
-            "oneOf": [
-            {
-                "type": "null"
-            },
-            {
-                "$ref": "#/definitions/_matrix"
-            }
-            ]
-        },
-        "+lynksExternalUrl": {
-            "description": "URL to a file location for the resource content.",
-            "oneOf": [
-            {
-                "type": "null"
-            },
-            {
-                "$ref": "#/definitions/_url"
-            }
-            ]
-        },
-        "+lynksRelations": {
-            "description": "Map for resource relations referenced by ids.",
-            "type": "object",
-            "additionalProperties": {
-                "type": "array",
-                "items": {
-                "type": "string"
-                }
-            }
-            }
+        "maxItems": 4,
+        "items": {
+          "type": "number"
         }
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array"
     },
-    "extraCityObjects": {
-        "+Item": {
-            "allOf": [
-                {
-                    "$ref": "cityobjects.schema.json#/_AbstractCityObject"
-                },
-                {
-                    "properties": {
-                        "type": {
-                            "enum": ["+Item"]
-                        }
-                    },
-                    "required": ["type"]
-                }
-            ]
+    "_url": {
+      "description": "URL to a file location.",
+      "pattern": "^(https?|http?|wss?|ftp?|sftp?|smb?|file):",
+      "type": "string"
+    },
+    "_AbstractCityObject": {
+      "properties": {
+        "attributes": {
+          "type": "object"
+        },
+        "parents": {
+          "type": "array",
+          "description": "the IDs of the parents",
+          "items": {
+            "type": "string"
+          }
+        },
+        "children": {
+          "type": "array",
+          "description": "the IDs of children",
+          "items": {
+            "type": "string"
+          }
+        },
+        "geographicalExtent": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 6,
+          "maxItems": 6
         }
+      }
     }
+  },
+  "version": "0.1",
+  "versionCityJSON": "2.0",
+  "extraRootProperties": {},
+  "extraAttributes": {
+    "+lynksFormat": {
+      "description": "File format key that indicated the interpreter of the resource content if an URL is defined.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "+lynksTransformation": {
+      "description": "Affine transformation matrix of size (4,4) to transform the resource content to the coordinate system of the parent (or if no parent existing to the global coordinates).",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/_matrix"
+        }
+      ]
+    },
+    "+lynksExternalUrl": {
+      "description": "URL to a file location for the resource content.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/_url"
+        }
+      ]
+    },
+    "+lynksRelations": {
+      "description": "Map for resource relations referenced by ids.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "extraCityObjects": {
+    "+Item": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/_AbstractCityObject"
+        },
+        {
+          "properties": {
+            "type": {
+              "enum": ["+Item"]
+            }
+          },
+          "required": ["type"]
+        }
+      ]
+    }
+  }
 }
