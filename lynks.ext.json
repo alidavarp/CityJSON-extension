@@ -103,7 +103,7 @@
         "+Item": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/_AbstractCityObject"
+                    "$ref": "cityobjects.schema.json#/_AbstractCityObject"
                 },
                 {
                     "properties": {
