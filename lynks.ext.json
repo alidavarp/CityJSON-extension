@@ -1,7 +1,8 @@
 {
   "type": "CityJSONExtension",
+  "$schema": "https://cityjson.org/schemas/cityjson-extension.schema.json",
   "name": "Lynks",
-  "url": "https://www.github.com/alidavarp/test/blob/main/lynks.ext.json",
+  "url": "https://raw.githubusercontent.com/alidavarp/test/main/lynks.ext.json",
   "description": "Extension to model inspection data links",
   "definitions": {
     "_matrix": {
