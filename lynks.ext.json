@@ -1,0 +1,288 @@
+{
+	"type": "CityJSONExtension",
+	"name": "Lynks",
+	"url": "https://raw.githubusercontent.com/alidavarp/test/main/lynks.ext.json",
+	"description": "Extension to model inspection data links with building components",
+	"definitions": {
+		"_matrix": {
+			"description": "Matrix for affine transformations of size (4,4) filled with decimal numbers.",
+			"items": {
+				"type": "array",
+				"minItems": 4,
+				"maxItems": 4,
+				"items": {
+					"type": "number"
+				}
+			},
+			"maxItems": 4,
+			"minItems": 4,
+			"type": "array"
+		},
+		"_url": {
+			"description": "URL to a file location.",
+			"pattern": "^(https?|http?|wss?|ftp?|sftp?|smb?|file):",
+			"type": "string"
+		},
+		"_boundingBox": {
+			"description": "3D bounding box defined by min and max points",
+			"type": "object",
+			"properties": {
+				"min": {
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "number"
+					}
+				},
+				"max": {
+					"type": "array",
+					"minItems": 3,
+					"maxItems": 3,
+					"items": {
+						"type": "number"
+					}
+				}
+			},
+			"required": [
+				"min",
+				"max"
+			]
+		},
+		"_subsetDefinition": {
+			"description": "Definition of how to select a subset of a data resource",
+			"type": "object",
+			"properties": {
+				"subsetMethod": {
+					"type": "string",
+					"enum": [
+						"BoundingBox",
+						"ID_based",
+						"SubFile"
+					],
+					"description": "Method to define a subset of data"
+				},
+				"parameters": {
+					"type": "object",
+					"description": "Parameters for the subset method",
+					"oneOf": [
+						{
+							"$ref": "#/definitions/_boundingBox"
+						},
+						{
+							"properties": {
+								"key": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"key"
+							]
+						},
+						{
+							"properties": {
+								"subFileUrl": {
+									"$ref": "#/definitions/_url"
+								}
+							},
+							"required": [
+								"subFileUrl"
+							]
+						}
+					]
+				}
+			},
+			"required": [
+				"subsetMethod",
+				"parameters"
+			]
+		},
+		"_lynkRelation": {
+			"type": "object",
+			"properties": {
+				"Linked_assets": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "Array of IDs of linked resources"
+				}
+			},
+			"required": [
+				"Linked_assets"
+			]
+		}
+	},
+	"version": "0.1",
+	"versionCityJSON": "2.0",
+	"extraRootProperties": {},
+	"extraCityObjects": {
+		"+LinkedResource": {
+			"allOf": [
+				{
+					"$ref": "cityobjects.schema.json#/_AbstractCityObject"
+				},
+				{
+					"properties": {
+						"type": {
+							"enum": [
+								"+LinkedResource"
+							]
+						},
+						"+assetType": {
+							"type": "string",
+							"enum": [
+								"PointCloud",
+								"CADModel",
+								"IFCModel",
+								"GIS",
+								"Inspection",
+								"Image",
+								"Document",
+								"Video",
+								"Sensor",
+								"OtherResource"
+							],
+							"description": "Type of asset represented by this object"
+						},
+						"+lynksExternalUrl": {
+							"description": "URL to a file location for the resource content.",
+							"oneOf": [
+								{
+									"type": "null"
+								},
+								{
+									"$ref": "#/definitions/_url"
+								}
+							]
+						},
+						"+lynksRelations": {
+							"type": "object",
+							"properties": {
+								"simple": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"affects": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"affectedBy": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"totalOf": {
+									"allOf": [
+										{
+											"$ref": "#/definitions/_lynkRelation"
+										},
+										{
+											"properties": {
+												"subsetDefinition": {
+													"$ref": "#/definitions/_subsetDefinition"
+												}
+											}
+										}
+									]
+								},
+								"subsetOf": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"scannedBy": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"scanOf": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"views": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"viewedIn": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"ancestorOf": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"descendantOf": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"coincides": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"coincidesPartiallyWith": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"hasPart": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"partOf": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"equals": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"disjoint": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"intersects": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"touches": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"contains": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"within": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"overlaps": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"covers": {
+									"$ref": "#/definitions/_lynkRelation"
+								},
+								"crosses": {
+									"$ref": "#/definitions/_lynkRelation"
+								}
+							},
+							"additionalProperties": false,
+							"description": "Defines semantic links to other assets with specific relation types."
+						},
+						"+attributes": {
+							"description": "Asset-specific attributes",
+							"type": "object",
+							"properties": {
+								"is_indiziert": {
+									"type": "boolean",
+									"description": "Whether the resource has index information"
+								},
+								"has_subset": {
+									"type": "boolean",
+									"description": "Whether the resource has defined subsets"
+								},
+								"boundingBox": {
+									"$ref": "#/definitions/_boundingBox",
+									"description": "Bounding box of the resource"
+								},
+								"format": {
+									"type": "string",
+									"description": "Format of the resource file"
+								}
+							},
+							"required": [
+								"format"
+							]
+						}
+					},
+					"required": [
+						"type",
+						"+assetType",
+						"+lynksExternalUrl",
+						"+lynksRelations",
+						"+attributes"
+					]
+				}
+			]
+		}
+	},
+	"extraSemanticSurfaces": {},
+	"extraAttributes": {}
+}
