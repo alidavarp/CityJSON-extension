@@ -258,10 +258,6 @@
 									"type": "boolean",
 									"description": "Whether the resource has defined subsets"
 								},
-								"boundingBox": {
-									"$ref": "#/definitions/_boundingBox",
-									"description": "Bounding box of the resource"
-								},
 								"format": {
 									"type": "string",
 									"description": "Format of the resource file"
