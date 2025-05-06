@@ -23,32 +23,6 @@
 			"pattern": "^(https?|http?|wss?|ftp?|sftp?|smb?|file):",
 			"type": "string"
 		},
-		"_boundingBox": {
-			"description": "3D bounding box defined by min and max points",
-			"type": "object",
-			"properties": {
-				"min": {
-					"type": "array",
-					"minItems": 3,
-					"maxItems": 3,
-					"items": {
-						"type": "number"
-					}
-				},
-				"max": {
-					"type": "array",
-					"minItems": 3,
-					"maxItems": 3,
-					"items": {
-						"type": "number"
-					}
-				}
-			},
-			"required": [
-				"min",
-				"max"
-			]
-		},
 		"_subsetDefinition": {
 			"description": "Definition of how to select a subset of a data resource",
 			"type": "object",
@@ -63,13 +37,28 @@
 					"description": "Method to define a subset of data"
 				},
 				"parameters": {
-					"type": "object",
 					"description": "Parameters for the subset method",
 					"oneOf": [
 						{
-							"$ref": "#/definitions/_boundingBox"
+							"type": "array",
+							"items": {
+								"oneOf": [
+									{
+										"$ref": "#/definitions/_matrix"
+									},
+									{
+										"type": "array",
+										"minItems": 6,
+										"maxItems": 6,
+										"items": {
+											"type": "number"
+										}
+									}
+								]
+							}
 						},
 						{
+							"type": "object",
 							"properties": {
 								"key": {
 									"type": "string"
@@ -80,6 +69,7 @@
 							]
 						},
 						{
+							"type": "object",
 							"properties": {
 								"subFileUrl": {
 									"$ref": "#/definitions/_url"
@@ -182,9 +172,6 @@
 										}
 									]
 								},
-								"subsetOf": {
-									"$ref": "#/definitions/_lynkRelation"
-								},
 								"scannedBy": {
 									"$ref": "#/definitions/_lynkRelation"
 								},
@@ -246,26 +233,9 @@
 							"additionalProperties": false,
 							"description": "Defines semantic links to other assets with specific relation types."
 						},
-						"+attributes": {
-							"description": "Asset-specific attributes",
-							"type": "object",
-							"properties": {
-								"is_indiziert": {
-									"type": "boolean",
-									"description": "Whether the resource has index information"
-								},
-								"has_subset": {
-									"type": "boolean",
-									"description": "Whether the resource has defined subsets"
-								},
-								"format": {
-									"type": "string",
-									"description": "Format of the resource file"
-								}
-							},
-							"required": [
-								"format"
-							]
+						"+lynksFormat ": {
+							"description": "Format of the resource file",
+							"type": "string"
 						}
 					},
 					"required": [
@@ -273,7 +243,7 @@
 						"+assetType",
 						"+lynksExternalUrl",
 						"+lynksRelations",
-						"+attributes"
+						"+lynksFormat"
 					]
 				}
 			]
