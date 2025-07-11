@@ -228,6 +228,9 @@
 								},
 								"crosses": {
 									"$ref": "#/definitions/_lynkRelation"
+								},
+								"coveredBy": {
+									"$ref": "#/definitions/_lynkRelation"
 								}
 							},
 							"additionalProperties": false,
