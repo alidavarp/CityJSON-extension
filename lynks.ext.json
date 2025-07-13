@@ -71,15 +71,7 @@
 						{
 							"type": "array",
 							"items": {
-								"type": "object",
-								"properties": {
-									"subFileUrl": {
-										"$ref": "#/definitions/_url"
-									}
-								},
-								"required": [
-									"subFileUrl"
-								]
+								"$ref": "#/definitions/_url"
 							}
 						}
 					]
