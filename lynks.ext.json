@@ -69,15 +69,18 @@
 							]
 						},
 						{
-							"type": "object",
-							"properties": {
-								"subFileUrl": {
-									"$ref": "#/definitions/_url"
-								}
-							},
-							"required": [
-								"subFileUrl"
-							]
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"subFileUrl": {
+										"$ref": "#/definitions/_url"
+									}
+								},
+								"required": [
+									"subFileUrl"
+								]
+							}
 						}
 					]
 				}
